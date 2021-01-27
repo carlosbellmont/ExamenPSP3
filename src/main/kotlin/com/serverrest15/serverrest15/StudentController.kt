@@ -11,7 +11,7 @@ class StudentController(private val studentRepository : StudentRepository) {
         return studentRepository.findAll()
     }
 
-    @PostMapping("/students")
+    @PostMapping("/student")
     fun insertStudent(@RequestBody student : Student){
         studentRepository.save(student)
     }
