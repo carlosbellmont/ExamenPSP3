@@ -8,25 +8,23 @@ class StudentController(private val studentRepository : StudentRepository) {
 
     @GetMapping("/students")
     fun getAllStudents() : List<Student> {
+        val list = studentRepository.findAll()
         Thread.sleep(1000)
-        return studentRepository.findAll()
+        return list
     }
 
     @PostMapping("/student")
     fun insertStudent(@RequestBody student : Student){
-        Thread.sleep(1000)
         studentRepository.save(student)
     }
 
     @GetMapping("/student/{id}")
     fun getStudent(@PathVariable id : Long) : Student {
-        Thread.sleep(1000)
         return studentRepository.findById(id).get()
     }
 
     @DeleteMapping("/student/{id}")
     fun deleteStudent(@PathVariable id : Long){
-        Thread.sleep(1000)
         studentRepository.deleteById(id)
     }
 }
