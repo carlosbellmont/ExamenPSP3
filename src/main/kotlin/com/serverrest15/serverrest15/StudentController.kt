@@ -1,5 +1,8 @@
 package com.serverrest15.serverrest15
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.springframework.web.bind.annotation.*
 
 
@@ -9,7 +12,6 @@ class StudentController(private val studentRepository : StudentRepository) {
     @GetMapping("/students")
     fun getAllStudents() : List<Student> {
         val list = studentRepository.findAll()
-        Thread.sleep(1000)
         return list
     }
 
@@ -25,6 +27,9 @@ class StudentController(private val studentRepository : StudentRepository) {
 
     @DeleteMapping("/student/{id}")
     fun deleteStudent(@PathVariable id : Long){
-        studentRepository.deleteById(id)
+        GlobalScope.launch {
+            delay(1000)
+            studentRepository.deleteById(id)
+        }
     }
 }
